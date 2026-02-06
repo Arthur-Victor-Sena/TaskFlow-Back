@@ -12,6 +12,8 @@ import java.util.Optional;
 @Service
 public class UserService {
     repository dao;
+
+
     public UserService(repository repository) {
         this.dao = repository;
     }
@@ -24,23 +26,35 @@ public class UserService {
 
     public ResponseEntity<String> novoUser(User user){
 
-        User newUser = dao.save(user);
+        User newUser = dao.saveAndFlush(user);
 
         if(newUser.getId() == null){
-         return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Deu erro patão");
+         return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }else {
-           return ResponseEntity.status(HttpStatus.CREATED).body("Deu certo patrão");
+           return ResponseEntity.status(HttpStatus.CREATED).build();
         }
 
 
 
     }
 
-    public ResponseEntity<User> listagemId(Long id){
+    public Optional<User> listagemId(Long id){
 
 
-        return dao.findById(id).map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        return dao.findById(id);
+    }
+
+
+    public User atualizarId(Long id , User user){
+
+        User userBanco = dao.findById(id)
+                        .orElseThrow(() -> new RuntimeException("Usuário não encontrado my friend"));
+
+        userBanco.setNome(user.getNome());
+        userBanco.setEmail(user.getEmail());
+        userBanco.setSenha(user.getSenha());
+
+       return dao.save(userBanco);
     }
 
 }

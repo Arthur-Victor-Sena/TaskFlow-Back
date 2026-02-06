@@ -29,7 +29,21 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<User> listagemId(@PathVariable Long id){
 
-    return userService.listagemId(id);
+    return userService.listagemId(id).map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
+
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<User> atualizarId(@PathVariable Long id, @RequestBody User user){
+
+        try{
+            userService.atualizarId(id , user);
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+
 
     }
 
