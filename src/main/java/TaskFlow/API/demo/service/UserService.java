@@ -34,8 +34,6 @@ public class UserService {
            return ResponseEntity.status(HttpStatus.CREATED).build();
         }
 
-
-
     }
 
     public Optional<User> listagemId(Long id){
@@ -56,5 +54,17 @@ public class UserService {
 
        return dao.save(userBanco);
     }
+
+
+    public void apagarpoId(Long id){
+
+        User userBanco = dao.findById(id)
+                .orElseThrow(() -> new RuntimeException(""));
+
+        dao.deleteById(id);
+
+
+    }
+
 
 }

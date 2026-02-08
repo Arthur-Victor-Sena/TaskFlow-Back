@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -48,5 +49,16 @@ public class UserController {
     }
 
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> apagarporId(@PathVariable Long id ){
+
+     try{
+         userService.apagarpoId(id);
+         return ResponseEntity.noContent().build();
+     }catch (RuntimeException e){
+         return ResponseEntity.notFound().build();
+     }
+
+    }
 
 }
