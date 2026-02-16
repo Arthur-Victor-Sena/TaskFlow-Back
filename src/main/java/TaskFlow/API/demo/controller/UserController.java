@@ -1,6 +1,7 @@
 package TaskFlow.API.demo.controller;
 import TaskFlow.API.demo.entity.User;
 import TaskFlow.API.demo.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +23,15 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<String> novoUser(@RequestBody User user){
+    public ResponseEntity<Void> novoUser(@RequestBody User user){
 
-        return userService.novoUser(user);
+        try{
+            userService.novoUser(user);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }catch (RuntimeException e ){
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+
     }
 
     @GetMapping("/{id}")

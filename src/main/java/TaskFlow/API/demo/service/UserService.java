@@ -24,16 +24,14 @@ public class UserService {
         return   dao.findAll();
     }
 
-    public ResponseEntity<String> novoUser(User user){
+    public void novoUser(User user){
+        Optional<User> virificacaoUser = dao.findByEmail(user.getEmail());
 
-        User newUser = dao.saveAndFlush(user);
-
-        if(newUser.getId() == null){
-         return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }else {
-           return ResponseEntity.status(HttpStatus.CREATED).build();
-        }
-
+        if(virificacaoUser.isEmpty() ){
+          dao.saveAndFlush(user);
+       }else{
+         throw   new RuntimeException("E-mail já está em uso");
+       }
     }
 
     public Optional<User> listagemId(Long id){
