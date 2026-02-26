@@ -22,8 +22,9 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private StatusTarefa status;
 
-    @Column(name = "id_user")
-    private Long id_user;
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
 
 
 

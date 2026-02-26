@@ -1,7 +1,6 @@
 package TaskFlow.API.demo.service;
 
 import TaskFlow.API.demo.entity.User;
-import TaskFlow.API.demo.repository.repository;
 import TaskFlow.API.demo.entity.Task;
 import TaskFlow.API.demo.repository.taskRepository;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ public class TaskService {
 
         try {
 
-            Optional<User> verifica = userService.listagemId(task.getId_user());
+            Optional<User> verifica = userService.listagemId(task.getUser().getId());
 
             if(verifica.isEmpty()){
                 throw new NullPointerException("Usuário não foi encontrado");
@@ -36,11 +35,15 @@ public class TaskService {
         }
     }
 
-
     public List<Task> listagemAll(){
 
        return dao.findAll();
 
     }
 
+    public  List<Task> ListagemTaskIdUser(Long id){
+
+    return dao.findByUserId(id);
+
+    }
 }
