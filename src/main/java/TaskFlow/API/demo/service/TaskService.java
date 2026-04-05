@@ -1,0 +1,62 @@
+package TaskFlow.API.demo.service;
+
+import TaskFlow.API.demo.entity.User;
+import TaskFlow.API.demo.entity.Task;
+import TaskFlow.API.demo.repository.taskRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class TaskService {
+    taskRepository dao;
+    UserService userService;
+
+
+    public TaskService(UserService userService, taskRepository dao) {
+        this.userService = userService;
+        this.dao = dao;
+    }
+
+    public void criarTarefa(Task task) {
+
+        try {
+
+            Optional<User> verifica = userService.listagemId(task.getUser().getId());
+
+            if (verifica.isEmpty()) {
+                throw new NullPointerException("Usuário não foi encontrado");
+            } else {
+                dao.save(task);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("ERRO AO SALVAR");
+        }
+    }
+
+    public List<Task> listagemAll() {
+
+        return dao.findAll();
+
+    }
+
+    public List<Task> listagemTaskIdUser(Long id) {
+
+        return dao.findByUserId(id);
+
+    }
+
+    public Optional<Task> listagemTaskId(Long id) {
+        return dao.findById(id);
+    }
+
+    public void apagarTask(Long id){
+
+        dao.findById(id)
+                .orElseThrow(() -> new RuntimeException("Id não encontrado"));
+
+        dao.deleteById(id);
+    }
+
+}
