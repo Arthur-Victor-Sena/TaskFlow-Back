@@ -9,12 +9,13 @@ Este projeto foi desenvolvido com o objetivo de **praticar e desenvolver habilid
 
 * [Objetivo do projeto](#-objetivo-do-projeto)
 * [Aprendizados adquiridos](#-aprendizados-adquiridos)
-* [Arquitetura do Projeto](#-arquitetura-do-projeto)
+* [Tecnologias](#tecnologias)
 * [Funcionalidades](#-funcionalidades)
-* [Endpoints da API](#-endpoints-da-api)
+* [Endpoints da API](#endpoints)
 * [Como executar o projeto](#️-como-executar-o-projeto)
 
 
+<a id="objetivo"></a>
 
 ## 🎯 Objetivo do projeto
 
@@ -29,7 +30,7 @@ Este projeto foi criado para praticar:
 * Organização de projeto full stack desacoplado
 
 ---
-
+<a id="aprendizados"></a>
 ## 📚 Aprendizados adquiridos
 
 Durante o desenvolvimento deste projeto, foram praticados e reforçados os seguintes conceitos:
@@ -47,7 +48,7 @@ Durante o desenvolvimento deste projeto, foram praticados e reforçados os segui
 
 ---
 
-
+<a id="tecnologias"></a>
 ## 🛠️ Tecnologias:
 
 * Java
@@ -59,7 +60,7 @@ Durante o desenvolvimento deste projeto, foram praticados e reforçados os segui
 
 
 ---
-
+<a id="funcionalidades"></a>
 ## 🚀 Funcionalidades
 
 * Cadastro de usuários
@@ -73,7 +74,7 @@ Durante o desenvolvimento deste projeto, foram praticados e reforçados os segui
 * Acompanhamento de status das tarefas
 
 ---
-
+ <a id="endpoints"></a>
 ## 📡 Endpoints da API
 
 ### 👤 Usuários
